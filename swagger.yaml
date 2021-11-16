@@ -1,0 +1,1093 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: onlineBookPurchase
+  description: Make online book purchases easily and quickly
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/rchmatagung/onlineBookPurchase/1.0.0
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      summary: Contains the names of all users
+      parameters:
+        - name: sorting
+          in: query
+          description: sorting user asc and desc
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: limit
+          in: query
+          description: display the limit of the limit of the user
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: offset user
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    post:
+      tags:
+        - users
+      summary: Create new user
+      # requestBody:
+      #   $ref: "#/components/requestBodies/user"
+      responses:
+        "500":
+          description: internal server error
+        "201":
+          description: Create user success
+
+  /users/{id}:
+    get:
+      tags:
+        - users
+      parameters:
+        - name: id
+          in: path
+          description: id of user
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    put:
+      tags:
+        - users
+      summary: update user data
+      parameters:
+        - name: id
+          in: path
+          description: id of user
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: invalid input
+        "200":
+          description: success
+
+    delete:
+      tags:
+        - users
+      summary: delete user by id
+      parameters:
+        - name: id
+          in: path
+          description: id of user
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Delete User
+        "200":
+          description: Success Delete User
+
+  /books:
+    get:
+      tags:
+        - books
+      summary: show all books
+      parameters:
+        - name: sorting
+          in: query
+          description: sorting book asc and desc
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: limit
+          in: query
+          description: display the limit of the limit of the book
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: offset book
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    post:
+      tags:
+        - books
+      summary: Create New Books
+      # requestBody:
+      #   $ref: "#/components/requestBodies/book"
+      responses:
+        "500":
+          description: internal server error
+        "201":
+          description: Create user success
+
+  /books/{id}:
+    get:
+      tags:
+        - books
+      parameters:
+        - name: id
+          in: path
+          description: id of book
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    put:
+      tags:
+        - books
+      summary: update book data
+      parameters:
+        - name: id
+          in: path
+          description: id of book
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: invalid update book
+        "200":
+          description: success update book
+
+    delete:
+      tags:
+        - books
+      summary: delete book by id
+      parameters:
+        - name: id
+          in: path
+          description: id of book
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Delete book
+        "200":
+          description: Success Delete book
+
+  /categories:
+    get:
+      tags:
+        - categories
+      summary: Display All Book By Category
+      parameters:
+        - name: sorting
+          in: query
+          description: sorting book asc and desc
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: limit
+          in: query
+          description: display the limit of the limit of the book
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: offset book
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    post:
+      tags:
+        - categories
+      summary: Create New Books Categories
+      # requestBody:
+      #   $ref: "#/components/requestBodies/book"
+      responses:
+        "500":
+          description: internal server error
+        "201":
+          description: Create user success
+
+  /categories/{id}:
+    get:
+      tags:
+        - categories
+      parameters:
+        - name: id
+          in: path
+          description: id of category
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    put:
+      tags:
+        - categories
+      summary: update category data
+      parameters:
+        - name: id
+          in: path
+          description: id of category
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      # requestBody:
+      #   $ref: '#/components/requestBodies/Category'
+      responses:
+        "405":
+          description: invalid update categories
+        "200":
+          description: success update categories
+
+    delete:
+      tags:
+        - categories
+      summary: delete categories by id
+      parameters:
+        - name: id
+          in: path
+          description: id of categories
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Delete categories
+        "200":
+          description: Success Delete categories
+
+  /descriptions:
+    get:
+      tags:
+        - descriptions
+      summary: Display All Book By description
+      parameters:
+        - name: sorting
+          in: query
+          description: sorting description asc and desc
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: limit
+          in: query
+          description: display the limit of the limit of the description
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: offset description
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    post:
+      tags:
+        - descriptions
+      summary: Create New Books Description
+      # requestBody:
+      #   $ref: "#/components/requestBodies/book"
+      responses:
+        "500":
+          description: internal server error
+        "201":
+          description: Create user success
+
+  /descriptions/{id}:
+    get:
+      tags:
+        - descriptions
+      parameters:
+        - name: id
+          in: path
+          description: id of description
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    put:
+      tags:
+        - descriptions
+      summary: update description data
+      parameters:
+        - name: id
+          in: path
+          description: id of description
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      # requestBody:
+      #   $ref: '#/components/requestBodies/Category'
+      responses:
+        "405":
+          description: invalid update description
+        "200":
+          description: success update description
+
+    delete:
+      tags:
+        - descriptions
+      summary: delete description by id
+      parameters:
+        - name: id
+          in: path
+          description: id of description
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Delete description
+        "200":
+          description: Success Delete description
+
+  /payment_methods:
+    get:
+      tags:
+        - payment_methods
+      summary: Display All Payment Methods
+      parameters:
+        - name: sorting
+          in: query
+          description: sorting payment methods asc and desc
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: sortBy
+          in: query
+          description: Sort by payment_methods
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - name
+              - nominal
+              - target_date
+              - priority
+              - is_done
+        - name: limit
+          in: query
+          description: display the limit of the limit of the payment methods
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: offset payment methods
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    post:
+      tags:
+        - payment_methods
+      summary: Create New payment methods
+      # requestBody:
+      #   $ref: "#/components/requestBodies/book"
+      responses:
+        "500":
+          description: internal server error
+        "201":
+          description: Create user success
+
+  /payment_methods/{id}:
+    get:
+      tags:
+        - payment_methods
+      parameters:
+        - name: id
+          in: path
+          description: id of payment methods
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    put:
+      tags:
+        - payment_methods
+      summary: update payment methods data
+      parameters:
+        - name: id
+          in: path
+          description: id of payment methods
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      # requestBody:
+      #   $ref: '#/components/requestBodies/Category'
+      responses:
+        "405":
+          description: invalid update payment methods
+        "200":
+          description: success update payment methods
+
+    delete:
+      tags:
+        - payment_methods
+      summary: delete payment methods by id
+      parameters:
+        - name: id
+          in: path
+          description: id of payment methods
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Delete payment methods
+        "200":
+          description: Success Delete payment methods
+
+  /transactions:
+    get:
+      tags:
+        - transactions
+      summary: Display All transactions
+      parameters:
+        - name: sorting
+          in: query
+          description: sorting transactions asc and desc
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: sortBy
+          in: query
+          description: Sort by transactions
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - name
+              - nominal
+              - target_date
+              - priority
+              - is_done
+        - name: limit
+          in: query
+          description: display the limit of the limit of the transactions
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: offset transactions
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    post:
+      tags:
+        - transactions
+      summary: Create New transactions
+      # requestBody:
+      #   $ref: "#/components/requestBodies/book"
+      responses:
+        "500":
+          description: internal server error
+        "201":
+          description: Create user success
+
+  /transactions/{id}:
+    get:
+      tags:
+        - transactions
+      parameters:
+        - name: id
+          in: path
+          description: id of transactions
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    put:
+      tags:
+        - transactions
+      summary: update payment transactions
+      parameters:
+        - name: id
+          in: path
+          description: id of transactions
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      # requestBody:
+      #   $ref: '#/components/requestBodies/Category'
+      responses:
+        "405":
+          description: invalid update transactions
+        "200":
+          description: success update transactions
+
+    delete:
+      tags:
+        - transactions
+      summary: delete transactions by id
+      parameters:
+        - name: id
+          in: path
+          description: id of transactions
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Delete transactions
+        "200":
+          description: Success Delete transactions
+
+  /transactions_details:
+    get:
+      tags:
+        - transactions_details
+      summary: Display All transactions details
+      parameters:
+        - name: sorting
+          in: query
+          description: sorting transactions details asc and desc
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: sortBy
+          in: query
+          description: Sort by transactions details
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - name
+              - nominal
+              - target_date
+              - priority
+              - is_done
+        - name: limit
+          in: query
+          description: display the limit of the limit of the transactions details
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: offset transactions details
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    post:
+      tags:
+        - transactions_details
+      summary: Create New transactions details
+      # requestBody:
+      #   $ref: "#/components/requestBodies/book"
+      responses:
+        "500":
+          description: internal server error
+        "201":
+          description: Create user success
+
+  /transactions_details/{id}:
+    get:
+      tags:
+        - transactions_details
+      parameters:
+        - name: id
+          in: path
+          description: id of transactions details
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Input
+        "200":
+          description: Success
+
+    put:
+      tags:
+        - transactions_details
+      summary: update payment transactions details
+      parameters:
+        - name: id
+          in: path
+          description: id of transactions details
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      # requestBody:
+      #   $ref: '#/components/requestBodies/Category'
+      responses:
+        "405":
+          description: invalid update transactions
+        "200":
+          description: success update transactions
+
+    delete:
+      tags:
+        - transactions_details
+      summary: delete transactions details by id
+      parameters:
+        - name: id
+          in: path
+          description: id of transactions details
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid Delete transactions details
+        "200":
+          description: Success Delete transactions details
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        address:
+          type: string
+      xml:
+        name: order
+
+    RefreshToken:
+      type: object
+      properties:
+        api_key:
+          type: string
+      xml:
+        name: RefeshToken
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        category:
+          type: string
+      xml:
+        name: category
+
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        author:
+          type: string
+        publisher:
+          type: string
+      xml:
+        name: Book
+
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: Tag
+
+    Description:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+      xml:
+        name: Description
+
+    Payment_method:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: Payment_method
+
+    Transaction:
+      required:
+        - name
+        - payment_methods
+        - total_qty
+        - total_price
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          example: wawan
+        payment_method:
+          type: string
+          example: Debit BRI (0098 0114 9875 503)
+        total_qty:
+          type: integer
+          example: 1
+        total_price:
+          type: integer
+          example: 100000
+        status:
+          type: string
+          description: book status in the store
+          enum:
+            - available
+            - pending
+            - sold
+      xml:
+        name: Transaction
+
+    Transaction_details:
+      required:
+        - title
+        - qty
+        - price
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        category:
+          $ref: "#/components/schemas/Category"
+        title:
+          type: string
+          example: Golang itu EZ
+        qty:
+          type: integer
+          example: 1
+        price:
+          type: integer
+          example: 100000
+        tags:
+          type: array
+          xml:
+            name: tag
+            wrapped: true
+          items:
+            $ref: "#/components/schemas/Tag"
+      xml:
+        name: Transaction_Detail
+
+  requestBodies:
+    User:
+      description: User object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Transasction_details"
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/Transasction_details"
+      required: true
+    Transaction_Details:
+      description: Transaction_Detail object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Transasction_details"
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/Transasction_details"
+      required: true
+    Transaction:
+      description: Transaction object that needs to be added to the store, for buys books
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Transasction"
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/Transasction"
+      required: true
+    RefreshToken:
+      description: RefeshToken object that needs to be refresh the token
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RefreshToken"
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/RefreshToken"
+      required: true
+    Book:
+      description: book object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Book"
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/Book"
+      required: true
+    Payment_method:
+      description: payment_method object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Payment_method"
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/Payment_method"
+      required: true
+    Category:
+      description: category object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Category"
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/Category"
+      required: true
+    Description:
+      description: category object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Description"
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/Description"
+      required: true
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/User"
+      required: true
