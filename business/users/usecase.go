@@ -14,9 +14,9 @@ type UserUsecase struct {
 	jwtAuth	*middleware.ConfigJWT
 }
 
-func NewUseCase(repo Repository, contextTimeout time.Duration, jwtAuth *middleware.ConfigJWT) *UserUsecase {
+func NewUseCase(UserRepo Repository, contextTimeout time.Duration, jwtAuth *middleware.ConfigJWT) UseCase {
 	return &UserUsecase{
-		repo: repo,
+		repo: UserRepo,
 		contextTimeout: contextTimeout,
 		jwtAuth: jwtAuth,
 	}
@@ -66,7 +66,7 @@ func (UseCase *UserUsecase) Register(ctx context.Context, domain Domain) (Domain
 		return Domain{}, errors.New("Password Required")
 	}
 
-	user, err := UseCase.repo.Register(ctx, domain)
+	user, err := UseCase.repo.Register(ctx, &domain)
 	if err != nil {
 		return Domain{}, err
 	}
