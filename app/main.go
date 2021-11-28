@@ -1,4 +1,4 @@
-package app
+package main
 
 import (
 	"log"
@@ -42,7 +42,7 @@ import (
 )
 
 func init() {
-	viper.SetConfigFile(`config.json`)
+	viper.SetConfigFile(`app/config.json`)
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(err)

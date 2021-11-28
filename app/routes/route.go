@@ -36,8 +36,8 @@ func (controller *RouteControllerList) RouteRegister(e *echo.Echo) {
 	e.POST("books/insertbook", controller.BookController.InsertBook)
 	e.GET("books", controller.BookController.GetAllBooks)
 	e.GET("books/:id", controller.BookController.GetBookById)
-	e.DELETE("users/:id", controller.BookController.DeleteBook)
-	e.PUT("users/:id", controller.BookController.UpdateBook)
+	e.DELETE("books/:id", controller.BookController.DeleteBook)
+	e.PUT("books/:id", controller.BookController.UpdateBook)
 
 	//category
 	e.POST("category/insertcategory", controller.CategoryController.InsertCategory)
