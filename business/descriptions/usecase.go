@@ -41,7 +41,7 @@ func (UseCase *DescriptionUsecase) GetAllDescription(ctx context.Context, search
 	return description, nil
 }
 
-func (UseCase *DescriptionUsecase) GetById(ctx context.Context, id uint) (Domain, error) {
+func (UseCase *DescriptionUsecase) GetDescriptionById(ctx context.Context, id uint) (Domain, error) {
 	description, err := UseCase.repo.GetDescriptionById(ctx, id)
 	if err != nil {
 		return Domain{}, err

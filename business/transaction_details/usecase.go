@@ -17,7 +17,7 @@ func NewUseCase(repo Repository, contextTimeout time.Duration) *Transaction_Deta
 	}
 }
 
-func (Usecase *Transaction_DetailUsecase) InsertTransaction_Details(ctx context.Context, domain *Domain) (Domain, error) {
+func (Usecase *Transaction_DetailUsecase) InsertTransaction_Detail(ctx context.Context, domain *Domain) (Domain, error) {
 	transaction_detail, err := Usecase.repo.InsertTransaction_Detail(ctx, domain)
 
 	if err != nil {
@@ -27,7 +27,7 @@ func (Usecase *Transaction_DetailUsecase) InsertTransaction_Details(ctx context.
 	return transaction_detail, nil
 }
 
-func (Usecase *Transaction_DetailUsecase) GetListTransaction_Details(ctx context.Context, Book_Id uint, Transaction_Id uint) ([]Domain, error) {
+func (Usecase *Transaction_DetailUsecase) GetAllTransaction_Detail(ctx context.Context, Book_Id uint, Transaction_Id uint) ([]Domain, error) {
 	transaction_detail, err := Usecase.repo.GetAllTransaction_Detail(ctx, Book_Id, Transaction_Id)
 	if err != nil {
 		return []Domain{}, err
@@ -35,7 +35,7 @@ func (Usecase *Transaction_DetailUsecase) GetListTransaction_Details(ctx context
 	return transaction_detail, nil
 }
 
-func (Usecase *Transaction_DetailUsecase) GetById(ctx context.Context, id uint) (Domain, error) {
+func (Usecase *Transaction_DetailUsecase) GetTransaction_DetailById(ctx context.Context, id uint) (Domain, error) {
 	transaction_detail, err := Usecase.repo.GetTransaction_DetailById(ctx, id)
 	if err != nil {
 		return Domain{}, err

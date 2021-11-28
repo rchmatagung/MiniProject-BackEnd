@@ -12,7 +12,7 @@ type CategoryRepository struct {
 	Conn *gorm.DB
 }
 
-func NewUserRepository(conn *gorm.DB) *CategoryRepository {
+func NewCategoryRepository(conn *gorm.DB) *CategoryRepository {
 	return &CategoryRepository{
 		Conn: conn,
 	}

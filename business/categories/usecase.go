@@ -11,7 +11,7 @@ type CategoryUsecase struct {
 	contextTimeout time.Duration
 }
 
-func NewUseCase(repo Repository, contextTimeout time.Duration) *CategoryUsecase {
+func NewCategoryUseCase(repo Repository, contextTimeout time.Duration) *CategoryUsecase {
 	return &CategoryUsecase{
 		repo:           repo,
 		contextTimeout: contextTimeout,
@@ -32,7 +32,7 @@ func (UseCase *CategoryUsecase) InsertCategory(ctx context.Context, domain Domai
 	return category, nil
 }
 
-func (UseCase *CategoryUsecase) GetListCategory(ctx context.Context, search string) ([]Domain, error) {
+func (UseCase *CategoryUsecase) GetAllCategory(ctx context.Context, search string) ([]Domain, error) {
 	category, err := UseCase.repo.GetAllCategory(ctx, search)
 	if err != nil {
 		return []Domain{}, err
@@ -41,7 +41,7 @@ func (UseCase *CategoryUsecase) GetListCategory(ctx context.Context, search stri
 	return category, nil
 }
 
-func (UseCase *CategoryUsecase) GetById(ctx context.Context, id uint) (Domain, error) {
+func (UseCase *CategoryUsecase) GetCategoryById(ctx context.Context, id uint) (Domain, error) {
 	category, err := UseCase.repo.GetCategoryById(ctx, id)
 	if err != nil {
 		return Domain{}, err

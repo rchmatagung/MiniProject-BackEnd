@@ -18,7 +18,7 @@ func NewUserRepository(conn *gorm.DB) *TransactionRepository {
 	}
 }
 
-func (repo *TransactionRepository) InsertTransactions(ctx context.Context, domain *transactions.Domain) (transactions.Domain, error) {
+func (repo *TransactionRepository) InsertTransaction(ctx context.Context, domain *transactions.Domain) (transactions.Domain, error) {
 	transaction := FromDomain(*domain)
 	err := repo.Conn.Create(&transaction)
 	if err.Error != nil {

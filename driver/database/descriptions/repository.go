@@ -36,7 +36,7 @@ func (repo *DescriptionRepository) GetAllDescription(ctx context.Context, search
 	return AllDescription(data), nil
 }
 
-func (repo *DescriptionRepository) GetCategoryById(ctx context.Context, id uint) (descriptions.Domain, error) {
+func (repo *DescriptionRepository) GetDescriptionById(ctx context.Context, id uint) (descriptions.Domain, error) {
 	var description Descriptions
 	err := repo.Conn.Find(&description, "id = ?", id)
 	if err.Error != nil {

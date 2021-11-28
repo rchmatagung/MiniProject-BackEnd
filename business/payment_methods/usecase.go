@@ -32,7 +32,7 @@ func (Usecase *Payment_MethodUsecase) InsertPayment_Method(ctx context.Context, 
 	return payment_method, nil
 }
 
-func (Usecase *Payment_MethodUsecase) GetListPayment_Method(ctx context.Context, search string) ([]Domain, error) {
+func (Usecase *Payment_MethodUsecase) GetAllPayment_Method(ctx context.Context, search string) ([]Domain, error) {
 	payment_method, err := Usecase.repo.GetAllPayment_Method(ctx, search)
 	if err != nil {
 		return []Domain{}, err
@@ -40,7 +40,7 @@ func (Usecase *Payment_MethodUsecase) GetListPayment_Method(ctx context.Context,
 	return payment_method, nil
 }
 
-func (Usecase *Payment_MethodUsecase) GetById(ctx context.Context, id uint) (Domain, error) {
+func (Usecase *Payment_MethodUsecase) GetPayment_MethodById(ctx context.Context, id uint) (Domain, error) {
 	payment_method, err := Usecase.repo.GetPayment_MethodById(ctx, id)
 	if err != nil {
 		return Domain{}, err

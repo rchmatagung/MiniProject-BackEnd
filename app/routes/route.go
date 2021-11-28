@@ -15,7 +15,7 @@ import (
 
 type RouteControllerList struct {
 	JWTMiddleware 				middleware.JWTConfig
-	userController 				users.UserController
+	UserController 				users.UserController
 	BookController 				books.BookController
 	CategoryController 			categories.CategoryController
 	DescriptionController 		descriptions.DescriptionController
@@ -26,11 +26,11 @@ type RouteControllerList struct {
 
 func (controller *RouteControllerList) RouteRegister(e *echo.Echo) {
 	//users
-	e.POST("users/login", controller.userController.Login)
-	e.POST("users/register", controller.userController.Register)
-	e.GET("users", controller.userController.GetAllUsers)
-	e.DELETE("users/:id", controller.userController.DeleteUser)
-	e.PUT("users/:id", controller.userController.UpdateUser)
+	e.POST("users/login", controller.UserController.Login)
+	e.POST("users/register", controller.UserController.Register)
+	e.GET("users", controller.UserController.GetAllUsers)
+	e.DELETE("users/:id", controller.UserController.DeleteUser)
+	e.PUT("users/:id", controller.UserController.UpdateUser)
 
 	//books
 	e.POST("books/insertbook", controller.BookController.InsertBook)
