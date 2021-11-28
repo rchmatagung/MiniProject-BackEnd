@@ -2,12 +2,16 @@ package app
 
 import (
 	"log"
-	"miniproject/app/middleware"
 	"miniproject/app/routes"
-	UserUseCase "miniproject/business/users"
-	UserController "miniproject/controllers/users"
+	bookUseCase "miniproject/business/books"
+	bookController "miniproject/controllers/books"
+	bookRepository "miniproject/driver/database/books"
+	"miniproject/driver/database/categories"
+	"miniproject/driver/database/descriptions"
+	paymentmethods "miniproject/driver/database/payment_methods"
+	transactiondetails "miniproject/driver/database/transaction_details"
+	"miniproject/driver/database/transactions"
 	"miniproject/driver/database/users"
-	UserRepository "miniproject/driver/database/users"
 	"miniproject/driver/mysql"
 	"time"
 
@@ -29,8 +33,12 @@ func init() {
 
 func DBMigrate(db *gorm.DB) {
 	db.AutoMigrate(&users.Users{})
-	// db.AutoMigrate(&books.Books{})
-	// db.AutoMigrate(&categories.Categories{})
+	db.AutoMigrate(&bookRepository.Books{})
+	db.AutoMigrate(&categories.Categories{})
+	db.AutoMigrate(&descriptions.Descriptions{})
+	db.AutoMigrate(&paymentmethods.Payment_Methods{})
+	db.AutoMigrate(&transactiondetails.Transaction_Detail{})
+	db.AutoMigrate(&transactions.Transaction{})
 }
 
 func main() {
@@ -41,22 +49,26 @@ func main() {
 		DB_Port:     viper.GetString(`database.port`),
 		DB_Database: viper.GetString(`database.name`),
 	}
-	configJWT := middleware.ConfigJWT{
-		SecretJWT: viper.GetString(`jwt.secret`),
-		ExpiresDuration: viper.GetInt(`jwt.expired`),
-	}
+	// configJWT := middleware.ConfigJWT{
+	// 	SecretJWT: viper.GetString(`jwt.secret`),
+	// 	ExpiresDuration: viper.GetInt(`jwt.expired`),
+	// }
 
 	db := configDB.InitialDB()
 	DBMigrate(db)
 	e := echo.New()
 	timeoutContext := time.Duration(viper.GetInt("context.timeout"))* time.Second
 
-	userRepoInterface := UserRepository.NewUserRepository(db)
-	userUseCaseInterface := UserUseCase.NewUseCase(userRepoInterface, timeoutContext, &configJWT)
-	userControllerInterface := UserController.NewUserController(userUseCaseInterface)
+	// userRepoInterface := UserRepository.NewUserRepository(db)
+	// userUseCaseInterface := UserUseCase.NewUseCase(userRepoInterface, timeoutContext, &configJWT)
+	// userControllerInterface := UserController.NewUserController(userUseCaseInterface)
+
+	bookRepoInterface := bookRepository.NewUserRepository(db)
+	bookUseCaseInterface := bookUseCase.NewUseCase(bookRepoInterface, timeoutContext)
+	bookControllerInterface := bookController.NewBookController(bookUseCaseInterface)
 
 	routesInit := routes.RouteControllerList {
-		UserController: *userControllerInterface,
+		BookController: *bookControllerInterface,
 	}
 
 	routesInit.RouteRegister(e)
