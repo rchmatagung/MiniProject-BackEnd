@@ -47,7 +47,7 @@ func (repo *BookRepository) GetBookById(ctx context.Context, id uint) (books.Dom
 
 func (repo *BookRepository) Update(ctx context.Context, domain books.Domain, id uint) (books.Domain, error) {
 	data := FromDomain(domain)
-	if repo.Conn.Find(&data).Error != nil {
+	if repo.Conn.Save(&data).Error != nil {
 		return books.Domain{}, errors.New("Bad Request")
 	}
 	return data.ToDomain(), nil

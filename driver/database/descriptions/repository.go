@@ -47,7 +47,7 @@ func (repo *DescriptionRepository) GetDescriptionById(ctx context.Context, id ui
 
 func (repo *DescriptionRepository) Update(ctx context.Context, domain descriptions.Domain, id uint) (descriptions.Domain, error) {
 	data := FromDomain(domain)
-	if repo.Conn.Find(&data).Error != nil {
+	if repo.Conn.Save(&data).Error != nil {
 		return descriptions.Domain{}, errors.New("Bad Request")
 	}
 	return data.ToDomain(), nil

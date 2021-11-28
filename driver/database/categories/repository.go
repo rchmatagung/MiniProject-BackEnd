@@ -47,7 +47,7 @@ func (repo *CategoryRepository) GetCategoryById(ctx context.Context, id uint) (c
 
 func (repo *CategoryRepository) Update(ctx context.Context, domain categories.Domain, id uint) (categories.Domain, error) {
 	data := FromDomain(domain)
-	if repo.Conn.Find(&data).Error != nil {
+	if repo.Conn.Save(&data).Error != nil {
 		return categories.Domain{}, errors.New("Bad Request")
 	}
 	return data.ToDomain(), nil
