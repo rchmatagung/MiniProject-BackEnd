@@ -38,6 +38,18 @@ func TestInsertPayment_Method(t *testing.T) {
 		assert.NoError(t, err)
 		assert.Equal(t, payment_methodDomain, payment_method)
 	})
+
+	setup()
+	payment_methodRepository.On("InsertPayment_Method", mock.Anything, mock.Anything).Return(payment_methodDomain, errors.New("method payment empty")).Once()
+	t.Run("Test Case 2 | Error Insert Payment_Method", func(t *testing.T) {
+		payment_method, err := payment_methodService.InsertPayment_Method(context.Background(), paymentmethods.Domain{
+			Id:   1,
+			Type: "",
+		})
+
+		assert.Error(t, err)
+		assert.NotNil(t, payment_method)
+	})
 }
 
 func TestGetAllPayment_Method(t *testing.T) {

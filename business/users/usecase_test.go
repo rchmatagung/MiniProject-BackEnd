@@ -48,6 +48,34 @@ func TestRegister(t *testing.T) {
 		assert.NoError(t, err)
 		assert.Equal(t, userDomain, user)
 	})
+
+	userRepository.On("Register", mock.Anything, mock.Anything).Return(userDomain, errors.New("Email Empty"))
+	t.Run("Test Case 2 | Error Register", func(t *testing.T) {
+		user, err := userService.Register(context.Background(), users.Domain{
+			Id: 1,
+			Name: "agung",
+			Email: "",
+			Address: "lampung",
+			Password: "2323232",
+		})
+
+		assert.Error(t, err)
+		assert.NotNil(t, user)
+	})
+
+	userRepository.On("Register", mock.Anything, mock.Anything).Return(userDomain, errors.New("Password Empty"))
+	t.Run("Test Case 3 | Error Register", func(t *testing.T) {
+		user, err := userService.Register(context.Background(), users.Domain{
+			Id: 1,
+			Name: "agung",
+			Email: "dsadsadas@gmail.com",
+			Address: "lampung",
+			Password: "",
+		})
+
+		assert.Error(t, err)
+		assert.NotNil(t, user)
+	})
 }
 
 func TestLogin(t *testing.T) {
@@ -70,14 +98,12 @@ func TestLogin(t *testing.T) {
 		assert.Equal(t, token, "")
 	})
 
-	t.Run("Test Case 3 | Cannot Login (Wrong Auth)", func(t *testing.T) {
-		setup()
-		userRepository.On("GetByEmail",
-			mock.Anything, mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(users.Domain{}, errors.New("Users Not Found")).Once()
-		data, token, err := userService.Login(context.Background(), userDomain.Email, "1234")
+	t.Run("Test Case 3 | Cannot Login (Email Not Found)", func(t *testing.T) {
+		data, token, err := userService.Login(context.Background(), "", userDomain.Password)
 
-		assert.Equal(t, users.Domain{}, data, token, "")
+		assert.Equal(t, users.Domain{}, data)
 		assert.Error(t, err)
+		assert.Equal(t, token, "")
 	})
 }
 

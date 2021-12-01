@@ -38,6 +38,18 @@ func TestInsertCategory(t *testing.T) {
 		assert.NoError(t, err)
 		assert.Equal(t, categoryDomain, category)
 	})
+
+	setup()
+	categoryRepository.On("InsertCategory", mock.Anything, mock.Anything).Return(categoryDomain, errors.New("category empty"))
+	t.Run("Test Case 2 | Error Insert Category", func(t *testing.T) {
+		category, err := categoryService.InsertCategory(context.Background(), categories.Domain{
+			Id:       1,
+			Category: "",
+		})
+
+		assert.Error(t, err)
+		assert.NotNil(t, category)
+	})
 }
 
 func TestGetAllCategory(t *testing.T) {

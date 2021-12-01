@@ -43,7 +43,7 @@ func TestInsertTransaction(t *testing.T) {
 func TestGetListTransactions(t *testing.T) {
 	t.Run("Test case 1 | Success GetListTransactions", func(t *testing.T) {
 		setup()
-		transactionRepository.On("GetAllTransaction", mock.Anything, mock.Anything).Return(listTransactionDomain, nil).Once()
+		transactionRepository.On("GetAllTransaction", mock.Anything, mock.Anything, mock.Anything).Return(listTransactionDomain, nil).Once()
 		data, err := transactionService.GetAllTransaction(context.Background(), transactionDomain.Method_Payment_Id, transactionDomain.User_Id)
 
 		assert.NoError(t, err)
@@ -53,7 +53,7 @@ func TestGetListTransactions(t *testing.T) {
 
 	t.Run("Test case 2 | Error GetListTransactions", func(t *testing.T) {
 		setup()
-		transactionRepository.On("GetAllTransaction", mock.Anything, mock.Anything).Return([]transactions.Domain{}, errors.New("Transactions Not Found")).Once()
+		transactionRepository.On("GetAllTransaction", mock.Anything, mock.Anything, mock.Anything).Return([]transactions.Domain{}, errors.New("Transactions Not Found")).Once()
 		data, err := transactionService.GetAllTransaction(context.Background(), 0, 0)
 
 		assert.Error(t, err)

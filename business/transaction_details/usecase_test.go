@@ -44,7 +44,7 @@ func TestInsertTransaction_Detail(t *testing.T) {
 func TestGetListTransaction_Details(t *testing.T) {
 	t.Run("Test case 1 | Success GetListTransaction_Details", func(t *testing.T) {
 		setup()
-		transaction_detailRepository.On("GetAllTransaction_Detail", mock.Anything, mock.Anything).Return(listTransaction_DetailDomain, nil).Once()
+		transaction_detailRepository.On("GetAllTransaction_Detail", mock.Anything, mock.Anything, mock.Anything).Return(listTransaction_DetailDomain, nil).Once()
 		data, err := transaction_detailService.GetAllTransaction_Detail(context.Background(), transaction_detailDomain.Book_Id, transaction_detailDomain.Transaction_Id)
 
 		assert.NoError(t, err)
@@ -54,7 +54,7 @@ func TestGetListTransaction_Details(t *testing.T) {
 
 	t.Run("Test case 2 | Error GetListTransaction_Details", func(t *testing.T) {
 		setup()
-		transaction_detailRepository.On("GetAllTransaction_Detail", mock.Anything, mock.Anything).Return([]transactiondetails.Domain{}, errors.New("Transaction_Details Not Found")).Once()
+		transaction_detailRepository.On("GetAllTransaction_Detail", mock.Anything, mock.Anything, mock.Anything).Return([]transactiondetails.Domain{}, errors.New("Transaction_Details Not Found")).Once()
 		data, err := transaction_detailService.GetAllTransaction_Detail(context.Background(), 0, 0)
 
 		assert.Error(t, err)

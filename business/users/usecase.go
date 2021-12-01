@@ -56,20 +56,7 @@ func (UseCase *UserUsecase) Register(ctx context.Context, domain Domain) (Domain
 		return Domain{}, errors.New("Password Empty")
 	}
 
-	data, err := UseCase.repo.GetByEmail(ctx, domain.Email)
-
-	if data.Id > 0 {
-		return Domain{}, errors.New("Email Already Used")
-	}
-
-	if domain.Password == "" {
-		return Domain{}, errors.New("Password Required")
-	}
-
 	user, err := UseCase.repo.Register(ctx, &domain)
-	if err != nil {
-		return Domain{}, err
-	}
 	if err != nil {
 		return Domain{}, err
 	}

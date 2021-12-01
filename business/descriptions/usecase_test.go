@@ -38,6 +38,18 @@ func TestInsertDescription(t *testing.T) {
 		assert.NoError(t, err)
 		assert.Equal(t, descriptionDomain, description)
 	})
+
+	setup()
+	descriptionRepository.On("InsertDescription", mock.Anything, mock.Anything).Return(descriptionDomain, errors.New("Description empty")).Once()
+	t.Run("Test Case 2 | Error Insert Description", func(t *testing.T) {
+		description, err := descriptionService.InsertDescription(context.Background(), descriptions.Domain{
+			Id:          1,
+			Description: "",
+		})
+
+		assert.Error(t, err)
+		assert.NotNil(t, description)
+	})
 }
 
 func TestGetAllDescription(t *testing.T) {
