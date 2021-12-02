@@ -1,0 +1,56 @@
+name: "running unit test, build docker image"
+on:
+  push:
+    branches:
+      - "master"
+jobs:
+  unit-test:
+    name: "unit test"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17.2
+      - name: running unit test
+        run: go test ./... -cover
+  build-push-docker:
+    name: "build image and push registry dockerhub"
+    runs-on: ubuntu-latest
+    needs: unit-test
+    steps:
+      - uses: actions/checkout@v2
+      - name: build image
+        run: docker build -t rchmatagung/bookpurchase .
+      - name: login dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: push image to dockerhub
+        run: docker push rchmatagung/bookpurchase:latest
+  deployment:
+    name: "deploy to ec2"
+    runs-on: ubuntu-latest
+    needs: build-push-docker
+    steps:
+      - uses: actions/checkout@v2
+      - name: configuration ssh
+        env:
+          SSH_USER: ${{ secrets.SSH_USERNAME }}
+          SSH_KEY: ${{ secrets.BOOKPURCHASE_PEM }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/bookpurchase.pem
+          chmod 700 ~/.ssh/bookpurchase.pem
+          cat >> ~/.ssh/config << END
+          Host development 
+            HostName $SSH_HOST
+            User  $SSH_USER
+            IdentityFile ~/.ssh/bookpurchase.pem
+            StrictHostKeyChecking=no
+          END
+      - name: connect ec2, remove container, pull from registry, end start
+        run: ssh development 'docker rm -f $(docker ps -a -q) || true && docker pull rchmatagung/bookpurchase:latest && docker run -d -p 8080:8080 --name bookpurchase  rchmatagung/bookpurchase:latest'
