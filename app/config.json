@@ -1,7 +1,7 @@
 {
   "debug": true,
   "server": {
-    "address": ":8080"
+    "address": ":8000"
   },
   "context": {
     "timeout": 2
@@ -12,9 +12,5 @@
     "user": "admin",
     "pass": "agungsmpn22",
     "name": "bookpurchase"
-  },
-  "jwt": {
-    "secret": "supersecret12345!@#$%",
-    "expired": 72
   }
 }
