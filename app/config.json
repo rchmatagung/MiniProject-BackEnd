@@ -7,9 +7,9 @@
     "timeout": 2
   },
   "database": {
-    "host": "localhost",
+    "host": "bookpurchase.ctornsrxdmzi.us-east-2.rds.amazonaws.com",
     "port": "3306",
-    "user": "root",
+    "user": "admin",
     "pass": "agungsmpn22",
     "name": "bookpurchase"
   }
