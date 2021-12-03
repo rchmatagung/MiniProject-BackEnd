@@ -48,7 +48,7 @@ jobs:
           cat >> ~/.ssh/config << END
           Host development 
             HostName $SSH_HOST
-            User  $SSH_USER
+            User  $SSH_USERNAME
             IdentityFile ~/.ssh/bookpurchase.pem
             StrictHostKeyChecking=no
           END
