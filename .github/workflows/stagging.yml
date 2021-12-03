@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build image
-        run: docker build -t rchmatagung/bookpurchase .
+        run: docker build -t rchmatagung/bookpurchase -f Dockerfile .
       - name: login dockerhub
         uses: docker/login-action@v1
         with:
