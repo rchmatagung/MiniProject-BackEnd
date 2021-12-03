@@ -1,10 +1,10 @@
 #stageI (Build Binary)
 FROM golang:1.17.2-alpine3.14 AS builder
-WORKDIR /app
+WORKDIR /app/
 COPY . / . / ./
 RUN ls
 RUN go mod download
-RUN go build 
+RUN go build -o main 
 
 #stageII
 FROM alpine:3.14
