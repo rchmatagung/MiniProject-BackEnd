@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . / . / ./
 RUN ls
 RUN go mod download
-RUN go build -o main 
+RUN go build 
 
 #stageII
 FROM alpine:3.14
