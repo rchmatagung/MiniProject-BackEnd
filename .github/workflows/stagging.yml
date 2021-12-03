@@ -43,12 +43,12 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_BOOKPURCHASE_PEM" > ~/.ssh/bookpurchase.pem
+          echo "$SSH_KEY" > ~/.ssh/bookpurchase.pem
           chmod 700 ~/.ssh/bookpurchase.pem
           cat >> ~/.ssh/config << END
           Host development 
             HostName $SSH_HOST
-            User  $SSH_USERNAME
+            User  $SSH_USERN
             IdentityFile ~/.ssh/bookpurchase.pem
             StrictHostKeyChecking=no
           END
