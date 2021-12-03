@@ -52,5 +52,5 @@ jobs:
             identityFile ~/.ssh/bookpurchase.pem
             StrictHostKeyChecking=no
           END
-      - name: connect ec2, remove container, pull from registry, end start
-        run: ssh development 'docker rm -f $(docker ps -a -q) || true && docker pull rchmatagung/bookpurchase:latest && docker run -d -p 8000:8000 --name bookpurchase rchmatagung/bookpurchase:latest'
+      - name: Connect EC2 & Remove All Container & Pull from Registry & Start
+        run: ssh development 'docker rm -f $(docker ps -a -q) && docker pull rchmatagung/bookpurchase:latest && docker run -d -p 8000:8000 --name bookpurchase rchmatagung/bookpurchase:latest'
